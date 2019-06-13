@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:priorities/priorities/priorities_route.dart';
 import 'package:priorities/start_test/main_route.dart';
 import 'package:priorities/welcome/welcome_route.dart';
 
@@ -11,8 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         initialRoute: '/',
         routes: {
-          '/': (context) => MainRoute(),
+          '/': (context) => PrioritiesRoute(), // should be WelcomeRoute()
           '/main_route': (context) => MainRoute(),
+          '/priorities_route': (context) => PrioritiesRoute(),
         });
   }
 }
