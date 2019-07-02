@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:priorities/state/priority.dart';
+import 'package:priorities/entities/priority.dart';
 
 class PrioritiesComparsionRoute extends StatelessWidget {
 
   final Function _priorityClickedCallback;
+  final String firstPriority;
+  final String secondPriority;
 
-  PrioritiesComparsionRoute(this._priorityClickedCallback);
+  PrioritiesComparsionRoute(this._priorityClickedCallback, this.firstPriority, this.secondPriority);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class PrioritiesComparsionRoute extends StatelessWidget {
               flex: 8,
               child: ListView(
                 children: <Widget>[
-                  _definePriorityButton("priority Name"),
+                  _definePriorityButton(firstPriority),
                   Container(
                       alignment: AlignmentDirectional.center,
                       child: Padding(
@@ -23,7 +25,7 @@ class PrioritiesComparsionRoute extends StatelessWidget {
                           style: TextStyle(color: Colors.lightBlue),
                         ),
                       )),
-                  _definePriorityButton("priority Name")
+                  _definePriorityButton(secondPriority)
                 ],
               ));
   }

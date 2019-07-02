@@ -134,10 +134,13 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
         width: double.infinity,
         child: FlatButton(
           onPressed: () {
+            var priorities = [..._rootControllers, ..._addedControllers]
+                .map((controller) => controller.text)
+                .where((String priorityName) =>  priorityName != null && priorityName.isNotEmpty)
+                .toSet()
+                .toList();
             Navigator.pushNamed(context, "/priorities_comparsion_parent_route",
-                arguments: [..._rootControllers, ..._addedControllers]
-                    .map((TextEditingController controller) { controller.text; })
-                    .where((String priorityName) { priorityName != null && priorityName.isNotEmpty; }));
+                arguments: priorities);
           },
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
