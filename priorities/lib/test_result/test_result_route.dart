@@ -37,7 +37,7 @@ class TestResultRoute extends StatelessWidget {
             style: BorderStyle.solid,
             width: 1.0,
           ),
-          onPressed: null,
+          onPressed: () {},
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
             child: Text(priorityName.toUpperCase()),

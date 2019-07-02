@@ -20,9 +20,6 @@ class PriorityComparsionRootRoute extends StatelessWidget {
     for (String priority in priorities) {
       prioritiesMap[priority] = 0;
     }
-    for (MapEntry<String, int> value  in prioritiesMap.entries) {
-      print(value.key + " " + value.value.toString());
-    }
     return prioritiesMap;
   }
   
@@ -77,8 +74,7 @@ class _PriorityComparsionParentRouteState
 
   List _getResultPriorities() {
     var priorities = widget._prioritiesMap.values.toList();
-    priorities.sort();
-    priorities.reversed;
+    priorities.sort((a, b) => b.compareTo(a));
     return [
       _getPriorityByIndex(priorities[0]),
       _getPriorityByIndex(priorities[1]),

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:priorities/priorities/priorities_route.dart';
-import 'package:priorities/priorities_comparsion/priorities_comparsion_route.dart';
 import 'package:priorities/priorities_comparsion/priority_comparsion_parent_widget.dart';
 import 'package:priorities/start_test/main_route.dart';
-import 'package:priorities/test_result/test_result_route.dart';
-import 'package:priorities/welcome/welcome_route.dart';
 
 
 void main() => runApp(MyApp());
