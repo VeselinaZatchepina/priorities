@@ -6,8 +6,8 @@ class PrioritiesRoute extends StatefulWidget {
 }
 
 class _PrioritiesRouteState extends State<PrioritiesRoute> {
-  int _countOfAddedPriorityFileds = 0;
-  int _previousCountOfAddedPriorityFileds = 0;
+  int _countOfAddedPriorityFields = 0;
+  int _previousCountOfAddedPriorityFields = 0;
 
   TextEditingController firstRootEditFieldController;
   TextEditingController secondRootEditFieldController;
@@ -20,7 +20,11 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
     firstRootEditFieldController = TextEditingController();
     secondRootEditFieldController = TextEditingController();
     thirdRootEditFieldController = TextEditingController();
-    _rootControllers = [firstRootEditFieldController, secondRootEditFieldController, thirdRootEditFieldController];
+    _rootControllers = [
+      firstRootEditFieldController,
+      secondRootEditFieldController,
+      thirdRootEditFieldController
+    ];
     super.initState();
   }
 
@@ -35,9 +39,9 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
               flex: 8,
               child: ListView(
                 children: <Widget>[
-                  _definePriorityField("Family", _rootControllers[0]),
-                  _definePriorityField("Job", _rootControllers[1]),
-                  _definePriorityField("Money", _rootControllers[2]),
+                  _definePriorityField("Priority", _rootControllers[0]),
+                  _definePriorityField("Priority", _rootControllers[1]),
+                  _definePriorityField("Priority", _rootControllers[2]),
                   ..._defineAddedPriorityFiled(),
                   _defineAddPriorityButton(),
                   _defineStartButton()
@@ -72,21 +76,24 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
   }
 
   List<Widget> _defineAddedPriorityFiled() {
-    if (_countOfAddedPriorityFileds == 0) {
+    if (_countOfAddedPriorityFields == 0) {
       return [];
     }
 
     List<Widget> addedPriorityFields = [];
-    for (var i = 0; i < _countOfAddedPriorityFileds; i++) {
-      if (i == _countOfAddedPriorityFileds - 1 && _countOfAddedPriorityFileds != _previousCountOfAddedPriorityFileds) {
+    for (var i = 0; i < _countOfAddedPriorityFields; i++) {
+      if (i == _countOfAddedPriorityFields - 1 &&
+          _countOfAddedPriorityFields != _previousCountOfAddedPriorityFields) {
         TextEditingController newController = TextEditingController();
         _addedControllers.add(newController);
-        addedPriorityFields.add(_definePriorityField("New priority$i", newController));
-        _previousCountOfAddedPriorityFileds = _countOfAddedPriorityFileds;
+        addedPriorityFields
+            .add(_definePriorityField("Priority", newController));
+        _previousCountOfAddedPriorityFields = _countOfAddedPriorityFields;
         continue;
       }
-      addedPriorityFields.add(_definePriorityField("New priority$i", _addedControllers[i]));
-  }
+      addedPriorityFields
+          .add(_definePriorityField("Priority", _addedControllers[i]));
+    }
     return addedPriorityFields;
   }
 
@@ -107,8 +114,8 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
           ),
           onPressed: () {
             setState(() {
-              _previousCountOfAddedPriorityFileds = _countOfAddedPriorityFileds;
-              _countOfAddedPriorityFileds++;
+              _previousCountOfAddedPriorityFields = _countOfAddedPriorityFields;
+              _countOfAddedPriorityFields++;
             });
           },
           child: Padding(
@@ -136,20 +143,24 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
           onPressed: () {
             var priorities = [..._rootControllers, ..._addedControllers]
                 .map((controller) => controller.text)
-                .where((String priorityName) =>  priorityName != null && priorityName.isNotEmpty)
+                .where((String priorityName) =>
+                    priorityName != null && priorityName.isNotEmpty)
                 .toSet()
                 .toList();
-            Navigator.pushNamed(context, "/priorities_comparsion_parent_route",
-                arguments: priorities);
+            if (priorities.length >= 3) {
+              Navigator.pushNamed(
+                  context, "/priorities_comparsion_parent_route",
+                  arguments: priorities);
+            }
           },
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
             child: Text(
               "Start".toUpperCase(),
-              style: TextStyle(color: Colors.black87),
+              style: TextStyle(color: Colors.white),
             ),
           ),
-          color: Colors.orange.shade300,
+          color: Colors.lightBlue,
         ),
       ),
     );
@@ -157,11 +168,10 @@ class _PrioritiesRouteState extends State<PrioritiesRoute> {
 
   @override
   void dispose() {
-    for (int i=0; i < _addedControllers.length; i++) {
+    for (int i = 0; i < _addedControllers.length; i++) {
       _addedControllers[i].dispose();
     }
     _addedControllers.clear();
     super.dispose();
   }
-
 }

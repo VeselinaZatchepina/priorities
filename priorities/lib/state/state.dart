@@ -18,7 +18,6 @@ class LatestResultInit extends LatestResultState {}
 class LatestResultLoading extends LatestResultState {}
 
 class LatestResultSuccess extends LatestResultState {
-
   LatestResultSuccess(this.testResults);
 
   final List<TestResult> testResults;

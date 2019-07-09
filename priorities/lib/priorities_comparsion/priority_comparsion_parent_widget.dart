@@ -3,15 +3,10 @@ import 'package:priorities/priorities_comparsion/priorities_comparsion_route.dar
 import 'package:priorities/entities/priority.dart';
 import 'package:priorities/test_result/test_result_route.dart';
 
-
 class PriorityComparsionRootRoute extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-    final List<String> priorities = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    final List<String> priorities = ModalRoute.of(context).settings.arguments;
     return PriorityComparsionParentRoute(_initPrioritiesMap(priorities));
   }
 
@@ -22,12 +17,9 @@ class PriorityComparsionRootRoute extends StatelessWidget {
     }
     return prioritiesMap;
   }
-  
 }
 
-
 class PriorityComparsionParentRoute extends StatefulWidget {
-
   final Map<String, int> _prioritiesMap;
 
   PriorityComparsionParentRoute(this._prioritiesMap);
@@ -39,7 +31,6 @@ class PriorityComparsionParentRoute extends StatefulWidget {
 
 class _PriorityComparsionParentRouteState
     extends State<PriorityComparsionParentRoute> {
-  
   double _currentProgress = 0.0;
   double _progressStep = 0.0;
 
@@ -50,17 +41,16 @@ class _PriorityComparsionParentRouteState
 
   @override
   Widget build(BuildContext context) {
-    
     _progressStep = _getProgressStep();
 
     return Scaffold(
       body: SafeArea(
           child: Column(
-            children: <Widget>[
-              Expanded(flex: 2, child: _defineHeader()),
-              _getContent(),
-            ],
-          )),
+        children: <Widget>[
+          Expanded(flex: 2, child: _defineHeader()),
+          _getContent(),
+        ],
+      )),
     );
   }
 
@@ -83,7 +73,8 @@ class _PriorityComparsionParentRouteState
   }
 
   Widget _getPrioritiesComparsionRoute() {
-    return PrioritiesComparsionRoute(priorityClickedCallback,
+    return PrioritiesComparsionRoute(
+        priorityClickedCallback,
         widget._prioritiesMap.keys.elementAt(firstPriorityIndex),
         widget._prioritiesMap.keys.elementAt(secondPriorityIndex));
   }
@@ -110,7 +101,7 @@ class _PriorityComparsionParentRouteState
             alignment: AlignmentDirectional.center,
             child: Text(_getTextTitle(), style: TextStyle(fontSize: 18.0))));
   }
-  
+
   String _getTextTitle() {
     if (isPriorityTestResultShowed) {
       return "Your priorities are:";
@@ -144,9 +135,8 @@ class _PriorityComparsionParentRouteState
     }
   }
 
-  String _getPriorityByIndex(int value) =>
-      widget._prioritiesMap.keys.toList()[widget._prioritiesMap.values.toList().indexOf(
-          value)];
+  String _getPriorityByIndex(int value) => widget._prioritiesMap.keys
+      .toList()[widget._prioritiesMap.values.toList().indexOf(value)];
 
   int _getFullComparsionProgress() {
     int progress = 0;
@@ -166,11 +156,9 @@ class _PriorityComparsionParentRouteState
   }
 
   double _getProgressStep() => 1 / _getFullComparsionProgress();
-
 }
 
 class ProgressStatus extends StatelessWidget {
-
   final double _currentProgress;
 
   ProgressStatus(this._currentProgress);
@@ -184,4 +172,3 @@ class ProgressStatus extends StatelessWidget {
     );
   }
 }
-
